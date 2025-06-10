@@ -1,7 +1,7 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Code, Database, Server, Terminal } from "lucide-react"
-import SkillsSection from "@/components/skills-section"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Code, Database, Server, Terminal } from "lucide-react";
+import SkillsSection from "@/components/skills-section";
 
 export default function Home() {
   return (
@@ -15,11 +15,14 @@ export default function Home() {
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
                   Farruh Zoirov
                 </h1>
-                <p className="text-xl text-muted-foreground">Backend engineer</p>
+                <p className="text-xl text-muted-foreground">
+                  Backend engineer
+                </p>
               </div>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                I build robust, scalable backend systems and APIs that power modern web applications. Specializing in
-                Node.js, Express, and database optimization.
+                I build robust, scalable backend systems and APIs that power
+                modern web applications. Specializing in Node.js, Express, and
+                database optimization.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link href="/portfolio">
@@ -39,7 +42,9 @@ export default function Home() {
                   <div className="text-center">
                     <Terminal className="h-16 w-16 mx-auto mb-4 text-purple-500" />
                     <h2 className="text-2xl font-bold">Backend Developer</h2>
-                    <p className="text-muted-foreground mt-2">JavaScript • Node.js • Express • Nest.js</p>
+                    <p className="text-muted-foreground mt-2">
+                      JavaScript • Node.js • Express • Nest.js
+                    </p>
                   </div>
                 </div>
               </div>
@@ -53,10 +58,15 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">My Services</div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">What Can I Do</h2>
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+                My Services
+              </div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                What Can I Do
+              </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                I specialize in building robust backend systems that power modern web applications.
+                I specialize in building robust backend systems that power
+                modern web applications.
               </p>
             </div>
           </div>
@@ -66,7 +76,8 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-xl font-bold">API Development</h3>
                 <p className="text-muted-foreground">
-                  Building robust and scalable RESTful APIs using Node.js, Express, and Nest.js.
+                  Building robust and scalable RESTful APIs using Node.js,
+                  Express, and Nest.js.
                 </p>
               </div>
             </div>
@@ -75,7 +86,8 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-xl font-bold">Database Design</h3>
                 <p className="text-muted-foreground">
-                  Designing efficient database schemas and optimizing queries for SQL and NoSQL databases.
+                  Designing efficient database schemas and optimizing queries
+                  for SQL and NoSQL databases.
                 </p>
               </div>
             </div>
@@ -84,7 +96,8 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="text-xl font-bold">DevOps & CI/CD</h3>
                 <p className="text-muted-foreground">
-                  Setting up Docker containers and CI/CD pipelines for seamless deployment.
+                  Setting up Docker containers and CI/CD pipelines for seamless
+                  deployment.
                 </p>
               </div>
             </div>
@@ -101,17 +114,25 @@ export default function Home() {
           <div className="rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 p-8">
             <div className="flex flex-col items-center justify-center space-y-4 text-center text-white">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ready to work together?</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                  Ready to work together?
+                </h2>
                 <p className="mx-auto max-w-[700px] md:text-xl">
-                  Let's discuss how I can help bring your project to life with robust backend solutions.
+                  Let's discuss how I can help bring your project to life with
+                  robust backend solutions.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link href="/contact">
-                  <Button className="bg-white text-purple-600 hover:bg-gray-100">Get in Touch</Button>
+                  <Button className="bg-white text-purple-600 hover:bg-gray-100">
+                    Get in Touch
+                  </Button>
                 </Link>
                 <Link href="/portfolio">
-                  <Button variant="outline" className="border-white text-white hover:bg-white/20">
+                  <Button
+                    variant="outline"
+                    className="bg-white text-purple-600 hover:bg-gray-100"
+                  >
                     View My Work
                   </Button>
                 </Link>
@@ -121,5 +142,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }

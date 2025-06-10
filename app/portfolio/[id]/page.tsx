@@ -1,9 +1,8 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Github, Globe } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Github } from "lucide-react";
 
-// Sample project data - in a real app, this would come from a database or CMS
 const projects = {
   "e-commerce-backend": {
     title: "E-commerce Backend",
@@ -14,7 +13,14 @@ const projects = {
       Focused on performance, modularity, and clean API design to support high-volume traffic.Built with Nest.js for a modular, maintainable architecture, the system uses MongoDB for flexible data storage and Stripe for secure payment processing.
       The API follows RESTful principles with comprehensive documentation using Swagger.
     `,
-    technologies: ["Node.js", "Nest.js", "MongoDB", "Redis", "Docker", "Swagger"],
+    technologies: [
+      "Node.js",
+      "Nest.js",
+      "MongoDB",
+      "Redis",
+      "Docker",
+      "Swagger",
+    ],
     features: [
       "Product catalog with categories and search",
       "User authentication and profiles",
@@ -25,15 +31,16 @@ const projects = {
     challenges: [
       "Designing a flexible product catalog system",
       "Optimizing database queries for performance",
-       "Designed and implemented an efficient, scalable solution for hierarchical category management.",
+      "Designed and implemented an efficient, scalable solution for hierarchical category management.",
     ],
-    image: "/dynamics-market.png?height=600&width=1200",
+    image: "/dynamics-market-uz.jpg?height=600&width=1200",
     github: "https://github.com/farruhzoirov/dynamics-market-backend",
     liveDemo: "https://dynamics-market.uz/",
   },
   "real-time-chat": {
     title: "Real-time Chat System",
-    description: "Scalable real-time chat application backend with support for private messaging and group chats.",
+    description:
+      "Scalable real-time chat application backend with support for private messaging and group chats.",
     longDescription: `
       This real-time chat system provides a scalable backend for messaging applications, supporting both one-on-one and group conversations.
       
@@ -53,11 +60,12 @@ const projects = {
     ],
     image: "/realtime-chat-application.jpg?height=600&width=1200",
     github: "https://github.com/farruhzoirov/realtime-chat-application",
-    liveDemo: "",
+    liveDemo: "https://chat-app.sharefy.uz/",
   },
   "content-management-api": {
     title: "Content Management API for UMFT",
-    description: "Headless HEMIS API with content modeling, versioning, and multi-language support.",
+    description:
+      "Headless HEMIS API with content modeling, versioning, and multi-language support.",
     longDescription: `
       Developed backend APIs for the new version of a university website. Integrated with the university’s HEMIS API to sync academic and student data.
       Built APIs to support both the landing page and the admin panel functionalities.Implemented multi-language support to serve users in multiple regions.
@@ -75,20 +83,22 @@ const projects = {
       "Implementing efficient content versioning",
       "Optimizing REST API for performance",
     ],
-    image: "/umft.png?height=600&width=1200",
+    image: "/umft.jpg?height=600&width=1200",
     github: "https://github.com/farruhzoirov",
     liveDemo: "https://umft.uz",
-  }
-}
+  },
+};
 
 export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = projects[params.id as keyof typeof projects]
+  const project = projects[params.id as keyof typeof projects];
 
   if (!project) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <h1 className="text-4xl font-bold">Project not found</h1>
-        <p className="mt-4 text-muted-foreground">The project you're looking for doesn't exist.</p>
+        <p className="mt-4 text-muted-foreground">
+          The project you're looking for doesn't exist.
+        </p>
         <Link href="/portfolio">
           <Button className="mt-8">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -96,7 +106,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
           </Button>
         </Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -114,20 +124,28 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
             <h1 className="text-4xl font-bold tracking-tighter bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
               {project.title}
             </h1>
-            <p className="mt-4 text-xl text-muted-foreground">{project.description}</p>
+            <p className="mt-4 text-xl text-muted-foreground">
+              {project.description}
+            </p>
           </div>
 
           <div className="aspect-video w-full overflow-hidden rounded-lg mb-8">
-            <img src={project.image || "/placeholder.svg"} alt={project.title} className="h-full w-full object-cover" />
+            <img
+              src={project.image || "/placeholder.svg"}
+              alt={project.title}
+              className="h-full w-full object-cover"
+            />
           </div>
 
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
               <div className="prose dark:prose-invert max-w-none">
-                {project.longDescription.split("\n\n").map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
+                {project.longDescription
+                  .split("\n\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
               </div>
             </div>
 
@@ -144,7 +162,9 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold mb-4">Challenges & Solutions</h2>
+              <h2 className="text-2xl font-bold mb-4">
+                Challenges & Solutions
+              </h2>
               <ul className="space-y-2">
                 {project.challenges.map((challenge, index) => (
                   <li key={index} className="flex items-start">
@@ -163,7 +183,9 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 
             <div className="space-y-4">
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground">Technologies</h3>
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Technologies
+                </h3>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <Badge key={tech} variant="secondary">
@@ -174,7 +196,9 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
               </div>
 
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground">Links</h3>
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Links
+                </h3>
                 <div className="mt-2 space-y-2">
                   <a
                     href={project.github}
@@ -186,10 +210,10 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
                     GitHub Repository(It may be private)
                   </a>
                   <a
-                     href={project.liveDemo}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="flex items-center text-purple-600 dark:text-purple-400 hover:underline"
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-purple-600 dark:text-purple-400 hover:underline"
                   >
                     <Github className="mr-2 h-4 w-4" />
                     Live Demo
@@ -202,7 +226,8 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
           <div className="rounded-lg border p-6">
             <h2 className="text-xl font-bold mb-4">Need a similar solution?</h2>
             <p className="text-muted-foreground mb-4">
-              I can build a custom solution tailored to your specific requirements.
+              I can build a custom solution tailored to your specific
+              requirements.
             </p>
             <Link href="/contact">
               <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
@@ -213,5 +238,5 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

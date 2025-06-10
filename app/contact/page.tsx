@@ -1,30 +1,38 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Github, Mail, Phone, Send } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Github, Mail, Phone, Send } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +44,8 @@ export default function ContactPage() {
     formDataToSend.append("message", formData.message);
     formDataToSend.append("subject", formData.subject);
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwD6RDUSYxiR0hEmx0v7AeMzEcsVgivh5kmvLmwAa3llv8fson6XJ2X_FRJ5L627zAT/exec";
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbwD6RDUSYxiR0hEmx0v7AeMzEcsVgivh5kmvLmwAa3llv8fson6XJ2X_FRJ5L627zAT/exec";
 
     try {
       const response = await fetch(scriptURL, {
@@ -45,7 +54,9 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        alert('Message sent! Thanks for reaching out. I\'ll get back to you soon.')
+        alert(
+          "Message sent! Thanks for reaching out. I'll get back to you soon."
+        );
         // Optionally reset the form:
         // setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
@@ -65,7 +76,8 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Have a project in mind or want to discuss a potential collaboration? I'd love to hear from you.
+          Have a project in mind or want to discuss a potential collaboration?
+          I'd love to hear from you.
         </p>
       </div>
 
@@ -73,7 +85,10 @@ export default function ContactPage() {
         <Card>
           <CardHeader>
             <CardTitle>Send Me a Message</CardTitle>
-            <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>
+            <CardDescription>
+              Fill out the form below and I'll get back to you as soon as
+              possible.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -168,15 +183,49 @@ export default function ContactPage() {
         <Card>
           <CardHeader>
             <CardTitle>Contact Information</CardTitle>
-            <CardDescription>Feel free to reach out through any of these channels.</CardDescription>
+            <CardDescription>
+              Feel free to reach out through any of these channels.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+            <div className="flex items-start space-x-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-phone h-6 w-6 text-purple-500 mt-1"
+              >
+                <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+                <path d="m21.854 2.147-10.94 10.939"></path>
+              </svg>
+              <div>
+                <h3 className="font-medium">Telegram</h3>
+                <a
+                  className="text-muted-foreground"
+                  href="https://t.me/farruh_zoir"
+                  target="_blank"
+                >
+                  @farruh_zoir
+                </a>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Fastest way to reach me
+                </p>
+              </div>
+            </div>
             <div className="flex items-start space-x-4">
               <Phone className="h-6 w-6 text-purple-500 mt-1" />
               <div>
                 <h3 className="font-medium">Phone</h3>
                 <p className="text-muted-foreground">+998-97-545-04-09</p>
-                <p className="text-sm text-muted-foreground mt-1">Available weekdays 9AM-10PM (UTC+5)</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Available weekdays 9AM-10PM (UTC+5)
+                </p>
               </div>
             </div>
 
@@ -185,27 +234,9 @@ export default function ContactPage() {
               <div>
                 <h3 className="font-medium">Email</h3>
                 <p className="text-muted-foreground">fzoirov29@gmail.com</p>
-                <p className="text-sm text-muted-foreground mt-1">I typically respond within 24 hours</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-orange-500 mt-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-              </svg>
-              <div>
-                <h3 className="font-medium">Telegram</h3>
-                <a className="text-muted-foreground" href="https://t.me/farruh_zoir" target="_blank">@farruh_zoir</a>
-                <p className="text-sm text-muted-foreground mt-1">Fastest way to reach me</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  I typically respond within 24 hours
+                </p>
               </div>
             </div>
 
@@ -213,21 +244,29 @@ export default function ContactPage() {
               <Github className="h-6 w-6 text-purple-500 mt-1" />
               <div>
                 <h3 className="font-medium">GitHub</h3>
-                <a href="https://github.com/farruhzoirov" className="text-muted-foreground" target="_blank">farruhzoirov</a>
-                <p className="text-sm text-muted-foreground mt-1">Check out my open source contributions</p>
+                <a
+                  href="https://github.com/farruhzoirov"
+                  className="text-muted-foreground"
+                  target="_blank"
+                >
+                  farruhzoirov
+                </a>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Check out my open source contributions
+                </p>
               </div>
             </div>
 
             <div className="mt-8 pt-6 border-t">
               <h3 className="font-medium mb-2">Availability</h3>
               <p className="text-muted-foreground">
-                I'm currently available for freelance work and consulting. If you have a project that needs a backend
-                developer, let's talk!
+                I'm currently available for freelance work and consulting. If
+                you have a project that needs a backend developer, let's talk!
               </p>
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }
