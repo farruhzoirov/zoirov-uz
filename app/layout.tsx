@@ -10,7 +10,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Farruh Zoirov - Backend Developer",
+  title: "Farruh Zoirov - Backend Engineer",
   description:
     "Node.js, Express.js, Nest.js va boshqa zamonaviy texnologiyalarda samarali, xavfsiz va kengaytiriladigan backend tizimlar ishlab chiqishga ixtisoslashgan dasturchi.",
   keywords: `
