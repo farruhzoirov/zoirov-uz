@@ -61,7 +61,7 @@ export const services: Service[] = [
     description:
       "To'liq funksional e-commerce saytlar yaratish. Mahsulot katalogi va to'lov tizimlari bilan.",
     price: {
-      amount: 3000,
+      amount: 4000,
       startingFrom: true,
     },
     icon: ShoppingCart,
