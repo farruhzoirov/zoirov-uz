@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,257 +14,231 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Github, Mail, Phone, Send } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
+  const [formState, setFormState] = useState({
     name: "",
     email: "",
-    subject: "",
+    tgOrPhone: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("message", formData.message);
-    formDataToSend.append("subject", formData.subject);
+    let response = await fetch(`${process.env.API_URL}/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formState),
+    });
 
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbwD6RDUSYxiR0hEmx0v7AeMzEcsVgivh5kmvLmwAa3llv8fson6XJ2X_FRJ5L627zAT/exec";
-
-    try {
-      const response = await fetch(scriptURL, {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      if (response.ok) {
-        alert(
-          "Message sent! Thanks for reaching out. I'll get back to you soon."
-        );
-        // Optionally reset the form:
-        // setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        console.error("Server returned error:", response.statusText);
-      }
-    } catch (error: any) {
-      console.error("Error!", error.message);
-    }
-
+    response = await response.json();
     setIsSubmitting(false);
+
+    if ((response as any).success) {
+      setIsSubmitted(true);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+    }
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="space-y-4 text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
-          Get in Touch
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Have a project in mind or want to discuss a potential collaboration?
-          I'd love to hear from you.
-        </p>
-      </div>
+    <div className="py-12 md:py-16">
+      <div className="container px-4 md:px-6">
+        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+          <h1 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
+            Bog'lanish <span className="gradient-text">uchun</span>
+          </h1>
+          <p className="text-muted-foreground max-w-[700px] md:text-lg">
+            Loyiha yoki hamkorlik bo'yicha taklifingiz bormi? Sizni eshitishdan
+            xursandman!
+          </p>
+        </div>
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Send Me a Message</CardTitle>
-            <CardDescription>
-              Fill out the form below and I'll get back to you as soon as
-              possible.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Menga xabar yuboring</CardTitle>
+              <CardDescription>
+                Quyidagi formani to'ldiring va men imkon qadar tez sizga aloqaga
+                chiqaman.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {isSubmitted ? (
+                <div className="bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-300 p-4 rounded-md mb-4">
+                  Xabaringiz menga kelib tushdi! Tez orada sizga aloqaga
+                  chiqaman!.
+                </div>
+              ) : null}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name">Ism *</Label>
                   <Input
                     id="name"
                     name="name"
-                    placeholder="Your name"
+                    placeholder="Ismingiz"
                     required
-                    value={formData.name}
+                    value={formState.name}
                     onChange={handleChange}
                   />
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="tgOrPhone">
+                    Telegram yoki telefon raqam *
+                  </Label>
+                  <Input
+                    id="tgOrPhone"
+                    name="tgOrPhone"
+                    placeholder="Telegram foydalanuvchi nomingiz yoki telefon raqamingiz"
+                    required
+                    value={formState.tgOrPhone}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Elektron pochta (ixtiyoriy)</Label>
                   <Input
                     id="email"
                     name="email"
-                    type="email"
-                    placeholder="Your email"
-                    required
-                    value={formData.email}
+                    placeholder="Elektron pochta manzilingiz"
+                    value={formState.email}
                     onChange={handleChange}
                   />
                 </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="What's this about?"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your message"
-                  rows={5}
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
+
+                <div className="space-y-2">
+                  <Label htmlFor="message">Xabar (ixtiyoriy)</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Xabaringiz"
+                    rows={5}
+                    maxLength={500}
+                    value={formState.message}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full gradient-bg"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Yuborilmoqda..." : "Xabarni yuborish"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
+          <div className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Bog'lanish ma'lumotlari</CardTitle>
+                <CardDescription>
+                  Quyidagi bog'lanish ma'lumotlari orqali ham menga aloqaga
+                  chiqishingiz mumkin.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Phone className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-medium">Telefon</h3>
+                    <a
+                      href="tel:+998975450409"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Sending...
-                  </span>
-                ) : (
-                  <span className="flex items-center">
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
-                  </span>
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+                      +99897-545-04-09
+                    </a>
+                  </div>
+                </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Contact Information</CardTitle>
-            <CardDescription>
-              Feel free to reach out through any of these channels.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex items-start space-x-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="lucide lucide-phone h-6 w-6 text-purple-500 mt-1"
-              >
-                <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
-                <path d="m21.854 2.147-10.94 10.939"></path>
-              </svg>
-              <div>
-                <h3 className="font-medium">Telegram</h3>
-                <a
-                  className="text-muted-foreground"
-                  href="https://t.me/farruh_zoir"
-                  target="_blank"
-                >
-                  @farruh_zoir
-                </a>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Fastest way to reach me
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <Phone className="h-6 w-6 text-purple-500 mt-1" />
-              <div>
-                <h3 className="font-medium">Phone</h3>
-                <p className="text-muted-foreground">+998-97-545-04-09</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Available weekdays 9AM-10PM (UTC+5)
-                </p>
-              </div>
-            </div>
+                <div className="flex items-start gap-3">
+                  <Send className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-medium">Telegram</h3>
+                    <a
+                      href="https://t.me/farruh_zoir"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      @farruh_zoir
+                    </a>
+                  </div>
+                </div>
 
-            <div className="flex items-start space-x-4">
-              <Mail className="h-6 w-6 text-pink-500 mt-1" />
-              <div>
-                <h3 className="font-medium">Email</h3>
-                <p className="text-muted-foreground">fzoirov29@gmail.com</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  I typically respond within 24 hours
-                </p>
-              </div>
-            </div>
+                <div className="flex items-start gap-3">
+                  <Mail className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-medium">Elektron pochta</h3>
+                    <a
+                      href="mailto:fzoirov29@gmail.com"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      fzoirov29@gmail.com
+                    </a>
+                  </div>
+                </div>
 
-            <div className="flex items-start space-x-4">
-              <Github className="h-6 w-6 text-purple-500 mt-1" />
-              <div>
-                <h3 className="font-medium">GitHub</h3>
-                <a
-                  href="https://github.com/farruhzoirov"
-                  className="text-muted-foreground"
-                  target="_blank"
-                >
-                  farruhzoirov
-                </a>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Check out my open source contributions
-                </p>
-              </div>
-            </div>
+                <div className="flex items-start gap-3">
+                  <Github className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-medium">GitHub</h3>
+                    <a
+                      href="https://github.com/farruhzoirov"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      farruhzoirov
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-            <div className="mt-8 pt-6 border-t">
-              <h3 className="font-medium mb-2">Availability</h3>
-              <p className="text-muted-foreground">
-                I'm currently available for freelance work and consulting. If
-                you have a project that needs a backend developer, let's talk!
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Hamkorlik qilamiz</CardTitle>
+                <CardDescription>
+                  Men har doim yangi loyihalar, ijodiy g'oyalar yoki
+                  loyihangizni rivojlantirish imkoniyatlarini muhokama qilishga
+                  tayyorman.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Yangi veb-sayt yaratmoqchi bo'lgan biznes vakili, hamkorlikka
+                  qiziquvchi dasturchi yoki shunchaki salom aytmoqchi bo'lsangiz
+                  ham, men sizni eshitishdan xursandman!
+                </p>
+                <p className="text-muted-foreground">
+                  Xabaringizga 1-2 soat ichida javob beraman.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

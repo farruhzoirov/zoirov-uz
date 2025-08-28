@@ -1,142 +1,105 @@
-import Link from "next/link";
+import { HeroSection } from "@/components/hero-section";
+import { SkillsSection } from "@/components/skills-section";
+import { ExperienceSection } from "@/components/experience-section";
+import { EducationSection } from "@/components/education-section";
+import { ProjectCard } from "@/components/project-card";
+import { BlogCard } from "@/components/blog-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code, Database, Server, Terminal } from "lucide-react";
-import SkillsSection from "@/components/skills-section";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { projects } from "@/lib/projects";
+import { blogPosts } from "@/lib/blog-posts";
 
 export default function Home() {
+  // Get the latest 3 projects
+  const featuredProjects = projects.slice(0, 6);
+  // Get the latest 2 blog posts
+  const latestPosts = blogPosts.slice(0, 3);
+
   return (
-    <div className="container mx-auto px-4 py-12">
-      {/* Hero Section */}
-      <section className="py-12 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-            <div className="flex flex-col justify-center space-y-4">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
-                  Farruh Zoirov
-                </h1>
-                <p className="text-xl text-muted-foreground">
-                  Backend engineer
-                </p>
-              </div>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                I build robust, scalable backend systems and APIs that power
-                modern web applications. Specializing in Node.js, Express, and
-                database optimization.
-              </p>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/portfolio">
-                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                    View My Work
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline">Contact Me</Button>
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="relative h-[350px] w-[350px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 p-1">
-                <div className="absolute inset-1 rounded-full bg-background flex items-center justify-center">
-                  <div className="text-center">
-                    <Terminal className="h-16 w-16 mx-auto mb-4 text-purple-500" />
-                    <h2 className="text-2xl font-bold">Backend Developer</h2>
-                    <p className="text-muted-foreground mt-2">
-                      JavaScript • Node.js • Express • Nest.js
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div>
+      <HeroSection />
 
-      {/* Services Section */}
-      <section className="py-12 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
-                My Services
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                What Can I Do
-              </h2>
-              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                I specialize in building robust backend systems that power
-                modern web applications.
-              </p>
-            </div>
-          </div>
-          <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-            <div className="flex flex-col justify-center space-y-4">
-              <Server className="h-12 w-12 text-purple-500" />
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">API Development</h3>
-                <p className="text-muted-foreground">
-                  Building robust and scalable RESTful APIs using Node.js,
-                  Express, and Nest.js.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center space-y-4">
-              <Database className="h-12 w-12 text-pink-500" />
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">Database Design</h3>
-                <p className="text-muted-foreground">
-                  Designing efficient database schemas and optimizing queries
-                  for SQL and NoSQL databases.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center space-y-4">
-              <Code className="h-12 w-12 text-orange-500" />
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">DevOps & CI/CD</h3>
-                <p className="text-muted-foreground">
-                  Setting up Docker containers and CI/CD pipelines for seamless
-                  deployment.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
       <SkillsSection />
 
-      {/* CTA Section */}
-      <section className="py-12 md:py-24">
+      <ExperienceSection />
+
+      <EducationSection />
+
+      {/* Featured Projects Section */}
+      {/* <section className="py-12 md:py-16">
         <div className="container px-4 md:px-6">
-          <div className="rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 p-8">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center text-white">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Ready to work together?
-                </h2>
-                <p className="mx-auto max-w-[700px] md:text-xl">
-                  Let's discuss how I can help bring your project to life with
-                  robust backend solutions.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/contact">
-                  <Button className="bg-white text-purple-600 hover:bg-gray-100">
-                    Get in Touch
-                  </Button>
-                </Link>
-                <Link href="/portfolio">
-                  <Button
-                    variant="outline"
-                    className="bg-white text-purple-600 hover:bg-gray-100"
-                  >
-                    View My Work
-                  </Button>
-                </Link>
-              </div>
+          <div className="flex flex-col items-center text-center space-y-4 mb-8">
+            <h2 className="text-3xl font-bold tracking-tighter">
+              Tanlangan <span className="gradient-text">loyihalar</span>
+            </h2>
+            <p className="text-muted-foreground max-w-[700px]">
+              Mening so'nggi ishlarimni ko'rib chiqing. Ushbu loyihalar frontend dasturlashdagi ko'nikmalarim va
+              tajribamni ko'rsatadi.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <Button asChild variant="outline">
+              <Link href="/portfolio">
+                Barcha loyihalarni ko'rish <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section> */}
+
+      {/* Latest Blog Posts Section */}
+      <section className="py-12 md:py-16 bg-muted/50">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center text-center space-y-4 mb-8">
+            <h2 className="text-3xl font-bold tracking-tighter">
+              Oxirgi <span className="gradient-text">blog postlar</span>
+            </h2>
+            <p className="text-muted-foreground max-w-[700px]">
+              Men frontend dasturlash va IT sohasidagi tajribalarim haqida
+              yozaman.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {latestPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <Button asChild variant="outline">
+              <Link href="/blog">
+                Barcha postlarni o'qish <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-12 md:py-16">
+        <div className="container px-4 md:px-6">
+          <div className="rounded-lg p-8 md:p-12 gradient-bg text-white">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">
+                Hamkorlik qilamiz
+              </h2>
+              <p className="max-w-[700px] text-white/90">
+                G'oyalaringiz va biznes loyilaringizni amalga oshirishda yordam
+                berishdan mamnun bo'laman. Hamkorlik qilmoqchi bo'lsangiz, men
+                bilan bog'laning!
+              </p>
+              <Button asChild variant="secondary" size="lg">
+                <Link href="/contact">Aloqaga chiqing</Link>
+              </Button>
             </div>
           </div>
         </div>

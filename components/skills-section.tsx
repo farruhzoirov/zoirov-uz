@@ -1,79 +1,62 @@
-import { Badge } from "@/components/ui/badge"
-import { Code, Database, Server, Terminal } from "lucide-react"
+import { SkillBadge } from "@/components/skill-badge";
+import {
+  Code2,
+  FileJson,
+  Palette,
+  Layers,
+  Cpu,
+  LayoutGrid,
+  Boxes,
+  Smartphone,
+  PenTool,
+  Database,
+  Network,
+  GitBranch,
+  Package,
+} from "lucide-react";
 
-export default function SkillsSection() {
+export function SkillsSection() {
+  const skills = [
+    { name: "JavaScript", color: "js" as const, icon: Code2 },
+    { name: "Node.js", color: "node" as const, icon: Cpu },
+    { name: "Express.js", color: "express" as const, icon: Boxes },
+    { name: "Nest.js", color: "nest" as const, icon: Layers },
+    { name: "TypeScript", color: "default" as const, icon: FileJson },
+    { name: "MongoDB", color: "mongodb" as const, icon: Database },
+    { name: "MySQL", color: "mysql" as const, icon: Database },
+    { name: "PostgreSQL", color: "postgres" as const, icon: Database },
+    { name: "REST API", color: "api" as const, icon: Network },
+    { name: "JWT & Auth", color: "auth" as const, icon: Network },
+    { name: "Websockets", color: "websockets" as const, icon: Layers },
+    { name: "Docker", color: "docker" as const, icon: Package },
+  ];
+
   return (
-    <section className="py-12 md:py-24 bg-muted/50">
+    <section className="py-12 md:py-16 bg-muted/50">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Expertise</div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">My Skills</h2>
-            <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              I specialize in these technologies to build robust backend systems.
-            </p>
-          </div>
+        <div className="flex flex-col items-center text-center space-y-4 mb-8">
+          <h2 className="text-3xl font-bold tracking-tighter">
+            Mening <span className="gradient-text">ko'nikmalarim</span>
+          </h2>
+          <p className="text-muted-foreground max-w-[700px]">
+            Men yuqori samaradorlikka ega backend tizimlari va foydalanuvchilar
+            uchun qulay xizmatlarni yaratishda ushbu texnologiyalardan
+            foydalanaman.
+          </p>
         </div>
 
-        <div className="grid gap-8 mt-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-background">
-            <Terminal className="h-12 w-12 text-purple-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">JavaScript & Node.js</h3>
-            <p className="text-muted-foreground mb-4">
-              Building server-side applications with JavaScript and Node.js ecosystem.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mt-auto">
-              <Badge>JavaScript</Badge>
-              <Badge>TypeScript</Badge>
-              <Badge>Node.js</Badge>
-              <Badge>Express.js</Badge>
-              <Badge>Nest.js</Badge>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-background">
-            <Database className="h-12 w-12 text-pink-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">Databases</h3>
-            <p className="text-muted-foreground mb-4">
-              Designing and optimizing SQL and NoSQL databases for performance and scalability.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mt-auto">
-              <Badge>PostgreSQL</Badge>
-              <Badge>MongoDB</Badge>
-              <Badge>MySQL</Badge>
-              <Badge>Redis</Badge>
-              <Badge>SQL</Badge>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-background">
-            <Server className="h-12 w-12 text-orange-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">DevOps & CI/CD</h3>
-            <p className="text-muted-foreground mb-4">
-              Containerization, deployment automation, and infrastructure management.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mt-auto">
-              <Badge>Docker</Badge>
-              <Badge>CI/CD</Badge>
-              <Badge>Linux</Badge>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-6 rounded-lg border bg-background">
-            <Code className="h-12 w-12 text-purple-500 mb-4" />
-            <h3 className="text-xl font-bold mb-2">API Development</h3>
-            <p className="text-muted-foreground mb-4">
-              Building robust, scalable, and secure APIs for modern applications.
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mt-auto">
-              <Badge>REST</Badge>
-              <Badge>GraphQL</Badge>
-              <Badge>WebSockets</Badge>
-              <Badge>JWT</Badge>
-            </div>
-          </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {skills.map((skill) => (
+            <SkillBadge
+              key={skill.name}
+              name={skill.name}
+              color={skill.color}
+              icon={skill.icon}
+              className="text-sm py-1.5 px-3"
+            />
+          ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

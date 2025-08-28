@@ -1,95 +1,104 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/mode-toggle"
-import { Frame, Menu, X } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useMobile } from "@/hooks/use-mobile"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Menu, X } from "lucide-react";
+
+const navItems = [
+  { name: "Bosh sahifa", path: "/" },
+  { name: "Loyihalar", path: "/portfolio" },
+  { name: "Xizmatlar", path: "/services" },
+  { name: "Blog", path: "/blog" },
+  { name: "Aloqa", path: "/contact" },
+];
 
 export default function Navbar() {
-  const pathname = usePathname()
-  const isMobile = useMobile()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Close mobile menu when route changes
   useEffect(() => {
-    setIsMenuOpen(false)
-  }, [pathname])
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
 
-  // Close mobile menu when screen size changes to desktop
-  useEffect(() => {
-    if (!isMobile) {
-      setIsMenuOpen(false)
-    }
-  }, [isMobile])
-
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/portfolio", label: "Portfolio" },
-    { href: "/blog", label: "Blog" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ]
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md dark:bg-gray-950/80 shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Frame className="h-6 w-6" />
-          <span className="font-bold">Farruh Zoirov</span>
+          <span className="text-2xl font-bold gradient-text">FZ</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.href ? "text-foreground" : "text-muted-foreground",
-              )}
+              key={item.path}
+              href={item.path}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                pathname === item.path
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              }`}
             >
-              {item.label}
+              {item.name}
             </Link>
           ))}
+          <ThemeToggle />
         </nav>
 
-        <div className="flex items-center gap-2">
-          <ModeToggle />
-
-          {/* Mobile Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            <span className="sr-only">Toggle menu</span>
+        {/* Mobile Navigation Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Toggle Menu"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </Button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t">
-          <nav className="flex flex-col space-y-2 p-4">
+        <div className="md:hidden">
+          <nav className="container py-4 flex flex-col space-y-4 pb-6 bg-background">
             {navItems.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                  pathname === item.href
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                )}
+                key={item.path}
+                href={item.path}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  pathname === item.path
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
               >
-                {item.label}
+                {item.name}
               </Link>
             ))}
           </nav>
         </div>
       )}
     </header>
-  )
+  );
 }
