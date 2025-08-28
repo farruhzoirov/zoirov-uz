@@ -1,10 +1,11 @@
-import { blogPosts } from "@/lib/blog-posts"
-import { BlogCard } from "@/components/blog-card"
+import { blogPosts } from "@/lib/blog-posts";
+import { BlogCard } from "@/components/blog-card";
 
 export const metadata = {
   title: "Blog | Frontend Developer",
-  description: "Articles and insights on frontend development, design, and web technologies",
-}
+  description:
+    "Articles and insights on frontend development, design, and web technologies",
+};
 
 export default function BlogPage() {
   return (
@@ -15,7 +16,8 @@ export default function BlogPage() {
             Mening <span className="gradient-text">blogim</span>
           </h1>
           <p className="text-muted-foreground max-w-[700px] md:text-lg">
-            Frontend dasturlash va veb texnologiyalari bo'yicha ma'lumotlar, yangiliklar va tajribalarim.
+            Backend dasturlash va veb texnologiyalari bo'yicha ma'lumotlar,
+            yangiliklar va tajribalarim.
           </p>
         </div>
 
@@ -26,5 +28,5 @@ export default function BlogPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -219,7 +219,7 @@ export default function ContactPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Hamkorlik qilamiz</CardTitle>
+                <CardTitle>Hamkorlik qilamizmi?</CardTitle>
                 <CardDescription>
                   Men har doim yangi loyihalar, ijodiy g'oyalar yoki
                   loyihangizni rivojlantirish imkoniyatlarini muhokama qilishga
@@ -228,9 +228,9 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Yangi veb-sayt yaratmoqchi bo'lgan biznes vakili, hamkorlikka
-                  qiziquvchi dasturchi yoki shunchaki salom aytmoqchi bo'lsangiz
-                  ham, men sizni eshitishdan xursandman!
+                  Yangi backend yechimga muhtoj biznes vakili, loyiha uchun
+                  hamkorlikka qiziqqan dasturchi yoki shunchaki salom aytmoqchi
+                  bo‘lsangiz, men sizni eshitishdan xursandman!
                 </p>
                 <p className="text-muted-foreground">
                   Xabaringizga 1-2 soat ichida javob beraman.

@@ -60,7 +60,7 @@ export const projects: Project[] = [
     type: "Internet do'kon",
   },
   {
-    id: 8,
+    id: 2,
     title: 'Dynamics Kirim/Chiqim Bot ',
     slug: 'dynamics-finance-bot',
     description: `
@@ -81,18 +81,18 @@ export const projects: Project[] = [
     technologies: ['Node.js', 'Typescript', 'Grammy.js', 'MongoDB'],
     demoUrl: 'https://t.me/dynamics_market_finance_bot',
     features: [
-      "Tovarlarni ko'rish va tanlash",
-      "Tovarlarni savatga qo'shish",
-      'Buyurtma berish imkoniyati',
-      "Tovarlar haqida to'liq ma'lumot",
-      'Maxsulot qidirish tizimi',
-      'Tovarlar filtrlash',
-      'Savatdagi tovarlarni boshqarish',
+      'Ikki tilli qo‘llab-quvvatlash (uz/ru)',
+      '3 xil rol tizimi (Direktor, Kassir, Menejer)',
+      'Tranzaksiyalarni bosqichma-bosqich tasdiqlash jarayoni',
+      'Google Sheets bilan to‘liq integratsiya',
+      'Kapitalbank kurslarini avtomatik olish (web scraping orqali)',
+      'Kirim va chiqimlarni real vaqt monitoringi',
+      'Tranzaksiyalar bo‘yicha tarix va izlash imkoniyati',
     ],
     type: 'Telegram bot',
   },
   {
-    id: 9,
+    id: 3,
     title: 'Fast-nginx npm package',
     slug: 'fast-nginx-npm-package',
     description: `
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     type: 'Npm package',
   },
   {
-    id: 7,
+    id: 4,
     title: `Lingua Barno kursiga to'lov`,
     slug: 'lingua-barno-payment',
     description: `
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     type: 'Forma sayt',
   },
   {
-    id: 2,
+    id: 5,
     title: 'Azizbek Xabibullayev',
     slug: 'frontt-fulfiledu-uz',
     description: `
@@ -153,7 +153,7 @@ export const projects: Project[] = [
     type: 'Vebinar sayt',
   },
   {
-    id: 3,
+    id: 6,
     title: 'Kamola Baxtiyarovna',
     slug: 'masterkomo-uz',
     description: `
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     type: 'Vebinar sayt',
   },
   {
-    id: 4,
+    id: 7,
     title: 'Zarina Ismailovna',
     slug: 'russtilida-fulfiledu-uz',
     description: `Rus tili o'qituvchisi Zarina Ismailovna uchun qilib berilgan vebinar sayti. Sayt dizaynida qora rangdan to'g'ri foydalanilgan`,
@@ -200,7 +200,7 @@ export const projects: Project[] = [
     type: 'Vebinar sayt',
   },
   {
-    id: 5,
+    id: 8,
     title: 'Farhod Ruzmatov',
     slug: 'uzumone-netlify-app',
     description: `
@@ -223,7 +223,7 @@ export const projects: Project[] = [
     type: 'Vebinar sayt',
   },
   {
-    id: 6,
+    id: 9,
     title: 'Komiljon Xamidjonov',
     slug: 'backend-fulfiledu-uz',
     description: `
