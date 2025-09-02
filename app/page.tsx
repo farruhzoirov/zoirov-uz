@@ -63,7 +63,7 @@ export default function Home() {
               Oxirgi <span className="gradient-text">blog postlar</span>
             </h2>
             <p className="text-muted-foreground max-w-[700px]">
-              Men frontend dasturlash va IT sohasidagi tajribalarim haqida
+              Men backend dasturlash va IT sohasidagi tajribalarim haqida
               yozaman.
             </p>
           </div>

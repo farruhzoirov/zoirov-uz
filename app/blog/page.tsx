@@ -2,9 +2,9 @@ import { blogPosts } from "@/lib/blog-posts";
 import { BlogCard } from "@/components/blog-card";
 
 export const metadata = {
-  title: "Blog | Frontend Developer",
+  title: "Blog | Backend Developer",
   description:
-    "Articles and insights on frontend development, design, and web technologies",
+    "Articles and insights on backend development, Api optimization, and web technologies",
 };
 
 export default function BlogPage() {

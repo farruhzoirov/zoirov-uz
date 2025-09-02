@@ -1,10 +1,10 @@
-import { ServiceCard } from "@/components/service-card"
-import { services } from "@/lib/services"
+import { ServiceCard } from "@/components/service-card";
+import { services } from "@/lib/services";
 
 export const metadata = {
-  title: "Services | Frontend Developer",
-  description: "Professional frontend development services and pricing",
-}
+  title: "Services | Backend Developer",
+  description: "Professional backend development services and pricing",
+};
 
 export default function ServicesPage() {
   return (
@@ -29,8 +29,9 @@ export default function ServicesPage() {
           <div className="flex flex-col items-center text-center space-y-4 mb-6">
             <h2 className="text-2xl font-bold">Maxsus loyiha talablari?</h2>
             <p className="text-muted-foreground max-w-[700px]">
-              Aniq bir narsa kerakmi yoki murakkab loyiha rejangiz bormi? Ehtiyojingizga qarab maxsus narx taklifi olish
-              uchun men bilan bog'laning.
+              Aniq bir narsa kerakmi yoki murakkab loyiha rejangiz bormi?
+              Ehtiyojingizga qarab maxsus narx taklifi olish uchun men bilan
+              bog'laning.
             </p>
           </div>
           <div className="flex justify-center">
@@ -44,5 +45,5 @@ export default function ServicesPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
